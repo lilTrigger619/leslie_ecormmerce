@@ -67,6 +67,12 @@ function ProductEdit({ params }) {
     formState: { errors },
     setValue,
   } = useForm();
+	console.log({
+    handleSubmit,
+    control,
+    errors,
+    setValue,
+	});
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const classes = useStyles();
@@ -116,6 +122,7 @@ function ProductEdit({ params }) {
       setValue(imageField, data.secure_url);
       enqueueSnackbar('File uploaded successfully', { variant: 'success' });
     } catch (err) {
+			console.log("image upload error.", {err});
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
@@ -132,6 +139,7 @@ function ProductEdit({ params }) {
     countInStock,
     description,
   }) => {
+		console.log("got here");
     closeSnackbar();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
@@ -155,6 +163,7 @@ function ProductEdit({ params }) {
       enqueueSnackbar('Product updated successfully', { variant: 'success' });
       router.push('/admin/products');
     } catch (err) {
+			console.log("failed to update", err);
       dispatch({ type: 'UPDATE_FAIL', payload: getError(err) });
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
@@ -208,6 +217,7 @@ function ProductEdit({ params }) {
               <ListItem>
                 <form
                   onSubmit={handleSubmit(submitHandler)}
+                  //onSubmit={()=>console.log("submission")}
                   className={classes.form}
                 >
                   <List>

@@ -5,6 +5,7 @@ import '../styles/globals.css';
 import { StoreProvider } from '../utils/Store';
 
 function MyApp({ Component, pageProps }) {
+
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }) {
     <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
       <StoreProvider>
         <PayPalScriptProvider deferLoading={true}>
+
           <Component {...pageProps} />
         </PayPalScriptProvider>
       </StoreProvider>
